@@ -1,8 +1,17 @@
+using Fiap.Api.Residuos.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+#region INICIALIZANDO O BANCO DE DADOS
+var connectionString = builder.Configuration.GetConnectionString("DatabaseConnection");
+builder.Services.AddDbContext<DatabaseContext>(
+    opt => opt.UseOracle(connectionString).EnableSensitiveDataLogging(true)
+);
+#endregion
 
 
 #region Auth
