@@ -1,4 +1,9 @@
+using AutoMapper;
 using Fiap.Api.Residuos.Data;
+using Fiap.Api.Residuos.Data.Repository;
+using Fiap.Api.Residuos.Models;
+using Fiap.Api.Residuos.Services;
+using Fiap.Api.Residuos.ViewModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -32,6 +37,47 @@ builder.Services.AddAuthentication(options =>
     });
 #endregion
 
+#region Repositorios
+builder.Services.AddScoped<IMoradorRepository, MoradorRepository>();
+builder.Services.AddScoped<ILixeiraRepository, LixeiraRepository>();
+builder.Services.AddScoped<INotificacaoRepository, NotificacaoRepository>();
+#endregion
+
+
+#region Services
+builder.Services.AddScoped<IMoradorService, MoradorService>();
+builder.Services.AddScoped<ILixeiraService, LixeiraService>();
+builder.Services.AddScoped<INotificacaoService, NotificacaoService>();
+#endregion
+
+
+#region AutoMapper
+// Configuração do AutoMapper
+var mapperConfig = new AutoMapper.MapperConfiguration(c =>
+
+{
+    // Permite que coleções nulas sejam mapeadas
+    c.AllowNullCollections = true;
+    // Permite que valores de destino nulos sejam mapeados
+    c.AllowNullDestinationValues = true;
+
+    c.CreateMap<MoradorModel, MoradorViewModel>();
+    c.CreateMap<MoradorViewModel, MoradorModel>();
+    c.CreateMap<LixeiraModel, LixeiraViewModel>();
+    c.CreateMap<LixeiraViewModel, LixeiraModel>();
+    c.CreateMap<NotificacaoModel, NotificacaoViewModel>();
+    c.CreateMap<NotificacaoViewModel, NotificacaoModel>();
+});
+
+
+// Cria o mapper com base na configuração definida
+IMapper mapper = mapperConfig.CreateMapper();
+
+// Registra o IMapper como um serviço singleton no container de DI do ASP.NET Core
+builder.Services.AddSingleton(mapper);
+
+#endregion
+
 
 
 
@@ -57,4 +103,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.Run(); 
