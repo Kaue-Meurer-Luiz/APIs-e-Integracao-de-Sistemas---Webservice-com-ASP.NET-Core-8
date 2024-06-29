@@ -29,6 +29,7 @@ namespace Fiap.Api.Residuos.Data.Repository
             return _databaseContext.Lixeiras.ToList();
         }
 
+
         public LixeiraModel GetById(int id) => _databaseContext.Lixeiras.Find(id);
 
         public void Update(LixeiraModel lixeira)

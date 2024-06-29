@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Fiap.Api.Residuos.Data;
 using Fiap.Api.Residuos.Models;
 using Fiap.Api.Residuos.Services;
 using Fiap.Api.Residuos.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +15,7 @@ namespace Fiap.Api.Residuos.Controllers
     {
         private readonly ILixeiraService _lixeiraService;
         private readonly IMapper _mapper;
+        private DatabaseContext @object;
 
         public LixeiraController(ILixeiraService lixeiraService, IMapper mapper1)
         {
@@ -21,8 +24,18 @@ namespace Fiap.Api.Residuos.Controllers
         }
 
 
+        //campo abaixo apenas para tentativa da implementação dos tests
+        public LixeiraController(DatabaseContext @object)
+        {
+            this.@object = @object;
+        }
+
+
+
+
 
         [HttpGet]
+        [Authorize(Roles = "user, gerente, admin")]
         public ActionResult<IEnumerable<LixeiraViewModel>> Get()
         {
             var lista = _lixeiraService.ListarLixeiras();
@@ -41,6 +54,7 @@ namespace Fiap.Api.Residuos.Controllers
 
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "user, gerente, admin")]
         public ActionResult<LixeiraViewModel> Get([FromRoute]int id)
         {
             var model = _lixeiraService.ObterLixeiraPorId(id);
@@ -57,6 +71,7 @@ namespace Fiap.Api.Residuos.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "admin, gerente")]
         public ActionResult Post([FromBody] LixeiraViewModel viewModel)
         {
             var model = _mapper.Map<LixeiraModel>(viewModel);
@@ -67,6 +82,7 @@ namespace Fiap.Api.Residuos.Controllers
         
         
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin, gerente")]
         public ActionResult Put([FromRoute] int id,[FromBody] LixeiraViewModel viewModel)
         {
             if (viewModel.LixeiraId == id)
@@ -93,6 +109,7 @@ namespace Fiap.Api.Residuos.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult Delete([FromRoute] int id)
         {
             _lixeiraService.DeletarLixeira(id);
