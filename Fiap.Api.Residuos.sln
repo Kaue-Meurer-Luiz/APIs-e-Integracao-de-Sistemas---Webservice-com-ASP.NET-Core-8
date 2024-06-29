@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.Api.Residuos", "Fiap.Api.Residuos.csproj", "{D3E6895B-CC6D-421B-A5D3-CFECC864158F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.Api.Residuos", "Fiap.Api.Residuos.csproj", "{D3E6895B-CC6D-421B-A5D3-CFECC864158F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.Api.Residuos.Test", "..\Fiap.Api.Residuos.Test\Fiap.Api.Residuos.Test.csproj", "{A7163881-37C9-4B5A-A979-05AB691DC629}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D3E6895B-CC6D-421B-A5D3-CFECC864158F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3E6895B-CC6D-421B-A5D3-CFECC864158F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3E6895B-CC6D-421B-A5D3-CFECC864158F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7163881-37C9-4B5A-A979-05AB691DC629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7163881-37C9-4B5A-A979-05AB691DC629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7163881-37C9-4B5A-A979-05AB691DC629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7163881-37C9-4B5A-A979-05AB691DC629}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

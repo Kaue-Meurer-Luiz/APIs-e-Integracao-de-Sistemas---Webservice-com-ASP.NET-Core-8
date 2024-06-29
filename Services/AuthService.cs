@@ -12,7 +12,6 @@ namespace Fiap.Api.Residuos.Services
                 };
         public UserModel Authenticate(string username, string password)
         {
-            // Aqui você normalmente faria a verificação de senha de forma segura
             return _users.FirstOrDefault(u => u.Username == username & u.Password == password);
         }
     }
